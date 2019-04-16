@@ -442,35 +442,35 @@ public class Parser {
         return false;
     }
 
-    public static void main(String[] args) throws IOException {
-        //接收的算数表达式
-        String expr;
-
-        Double result = 0.0;
-
-        //Scanner or BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        Parser p = new Parser();
-
-        System.out.println("Enter an empty expression to stop.");
-
-        //一直输入直到输入为空结束
-        for(;;){
-            System.out.print("Enter expression: ");
-            expr = br.readLine();
-            if("".equals(expr)){
-                break;
-            }
-            try {
-                result = p.evaluate(expr);
-//                System.out.println("Result: " + result);
-                System.out.println("表达式成立");
-                System.out.println();
-
-            } catch (ParserException e) {
-                System.out.println(e);
-            }
-        }
-    }
+//    public static void main(String[] args) throws IOException {
+//        //接收的算数表达式
+//        String expr;
+//
+//        Double result = 0.0;
+//
+//        //Scanner or BufferedReader
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//
+//        Parser p = new Parser();
+//
+//        System.out.println("Enter an empty expression to stop.");
+//
+//        //一直输入直到输入为空结束
+//        for(;;){
+//            System.out.print("Enter expression: ");
+//            expr = br.readLine();
+//            if("".equals(expr)){
+//                break;
+//            }
+//            try {
+//                result = p.evaluate(expr);
+////                System.out.println("Result: " + result);
+//                System.out.println("表达式成立");
+//                System.out.println();
+//
+//            } catch (ParserException e) {
+//                System.out.println(e);
+//            }
+//        }
+//    }
 }
