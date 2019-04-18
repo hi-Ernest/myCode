@@ -29,7 +29,7 @@ public class SplitIdentifier_1 {
                 i++;
                 continue;
             }else if (map.containsValue(str.charAt(i))) {
-                if(j!=i) {
+                if(j!=i){
                     list.add(str.substring(j, i));
                 }
                 list.add(str.substring(i, i+1));
@@ -37,20 +37,25 @@ public class SplitIdentifier_1 {
             }
             i++;
         }
-        list.add(str.substring(j));
+        if(j<str.length())
+            list.add(str.substring(j));
+
         return list;
     }
-
 
     public static void main(String []args) {
         SplitIdentifier_1 splitIdentifier = new SplitIdentifier_1();
 
-        String str = "a++ddd*ee/20000+(d-i-o)+3";
+        String str = "a+d)dd";
         List<String> list = splitIdentifier.recognizeId(str);
+
 
         for(int i=0; i<list.size(); i++) {
             System.out.println(list.get(i));
         }
+
+        System.out.println(list.size());
+
     }
 
 }
