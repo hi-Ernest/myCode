@@ -1,4 +1,4 @@
-package compliation;
+package compliation.result;
 
 import java.util.ArrayList;
 import java.util.HashMap;

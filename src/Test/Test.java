@@ -57,11 +57,6 @@ public class Test {
 
         System.out.println(list);
 
-
-
     }
-//        private String getNextToken() {
-//            return list1.get(index++);
-//        }
 }
 

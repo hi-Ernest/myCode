@@ -1,19 +1,15 @@
-package compliation;
+package compliation.result;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @Author chr
- * @Date 4/17/2019 10:39 PM
- * @Version 2.0
+ * @Date 4/20/2019 4:04 PM
+ * @Version 1.0
  */
-public class Parser_2 {
-
+public class IfParser_2 {
     //+-*/i的集合
     private Map map;
 
@@ -21,7 +17,7 @@ public class Parser_2 {
     private List<String> list;
 
     //列表的下标
-    private int index = 0;
+    private int index;
 
     //每次扫描的字符串
     private String token;
@@ -29,7 +25,7 @@ public class Parser_2 {
     //最终的结果
     private boolean flag = true;
 
-    public Parser_2(List inputList) {
+    public IfParser_2(List inputList, int inputIndex) {
         map = new HashMap();
 
         map.put(1, "+");
@@ -49,7 +45,9 @@ public class Parser_2 {
             if(!map2.containsValue(list.get(i)))
                 list.set(i, "i");
         }
-        System.out.println(list);
+
+
+        index = inputIndex;
         this.token = list.get(index);
     }
 
@@ -136,14 +134,9 @@ public class Parser_2 {
         }
     }
 
-    public boolean match(String input) {
-        if(index+1 < list.size()) {
-            if(map.containsValue(input))
-                token = getNextToken();
-            return true;
-        }else
-            return false;
-
+    public void match(String input) {
+        if(map.containsValue(input))
+            token = getNextToken();
     }
 
     private String getNextToken() {
@@ -157,31 +150,5 @@ public class Parser_2 {
         this.flag = false;
     }
 
-
-
-    public static void main(String[] args) throws IOException {
-
-        //接收的算数表达式
-        String expr;
-        //Scanner or BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("输入一个空的字符串则退出.....");
-
-        //一直输入直到输入为空结束
-        while (true){
-            System.out.print("请输入您的算数表达式: ");
-            expr = br.readLine();
-            if ("".equals(expr)) {
-                break;
-            }
-
-            SplitIdentifier_1 splitIdentifier_1 = new SplitIdentifier_1();
-            List list = splitIdentifier_1.recognizeId(expr);
-            Parser_2 p = new Parser_2(list);
-
-            if(p.E())
-                System.out.println("您输入的表达式正确！！");
-        }
-    }
 
 }
