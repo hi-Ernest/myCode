@@ -1,5 +1,9 @@
 package compliation.result;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +51,17 @@ public class IfBoolean {
         map2.putAll(map);
         map2.remove(9);
 
-        for(int i=0;i<list.size();i++){
+        //找到输入的list的")"的位置
+        int j = list.size()-1;
+        while (j>=0){
+            if(list.get(j).equals(")")) {
+                memoryIndex = j;
+                break;
+            }
+            j--;
+        }
+
+        for(int i=0;i<=memoryIndex;i++){
             if(!map2.containsValue(list.get(i)))
                 list.set(i, "i");
         }
@@ -94,7 +108,6 @@ public class IfBoolean {
             B();
             if(token.equals(")")) {
                 match(")");
-                memoryIndex = index;
             }
             else
                 error();
@@ -127,4 +140,37 @@ public class IfBoolean {
     public void error() {
         this.flag = false;
     }
+
+
+
+//    public static void main(String[] args) throws IOException {
+//        String expr;
+//
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        System.out.println("输入一个空的字符串则结束.....");
+//
+//        while (true) {
+//            System.out.println("请输入你的布尔表达式： ");
+//            expr = br.readLine();
+//            if("".equals(expr))
+//                break;
+//
+//            Identifier identifier = new Identifier();
+//
+//            List<String> list = new ArrayList<>();
+//            list = identifier.identifier(expr, list);
+//
+//            IfBoolean pb = new IfBoolean(list,0);
+//
+//            if(pb.B())
+//                System.out.println("布尔表达式正确");
+//            else
+//                System.out.println("表达式错误");
+//
+//            System.out.println(pb.memoryIndex);
+//
+//        }
+//
+//    }
+
 }

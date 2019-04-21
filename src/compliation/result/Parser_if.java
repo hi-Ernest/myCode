@@ -33,14 +33,6 @@ public class Parser_if {
                 list.set(i, "i");
         }
 
-//        int boundaries;
-//        int i=list.size()-1;
-//        while (i>0){
-//            if(list.get(i).equals(")"))
-//                boundaries = i;
-//        }
-
-
         System.out.println(list);
 
         this.list = list;
@@ -60,25 +52,38 @@ public class Parser_if {
 
         getNextToken();
 
+        int memoryIndex = index;
         //判断if()中的语句是否正确
         IfBoolean ifBoolean = new IfBoolean(list, index);
-        if(ifBoolean.B())
+        if(ifBoolean.B()){
             index = ifBoolean.index;
+            memoryIndex = ifBoolean.memoryIndex;
+            System.out.println(memoryIndex);
+        }
         else
             error();
 
+        index = memoryIndex;
         token = list.get(index);
 
         if(!token.equals(")")) {
             return error();
         }else {
             getNextToken();
-            if(token.equals("else")) {
-                IfParser_2 ifParser2 = new IfParser_2(list, index);
-                if(!ifParser2.E())
+            IfParser_2 ifParser2 = new IfParser_2(list, index);
+            if(ifParser2.E()) {
+                //扫描到"else"
+                index = ifParser2.index;
+                token = list.get(index);
+            }
+
+            if(token.equals("else")){
+                getNextToken();
+                IfParser_2 ifParser21 = new IfParser_2(list, index);
+                if(!ifParser21.E()) {
                     flag = false;
-            }else
-                return error();
+                }
+            }
         }
 
         return flag;
@@ -136,21 +141,19 @@ public class Parser_if {
         map.put(2, "-");
         map.put(3, "*");
         map.put(4, "/");
-        map.put(51, "(");
+        map.put(5, "(");
         map.put(6, ")");
         map.put(7, "i");
-        map.put(1, "||");
-        map.put(2, "&&");
-        map.put(33, "<");
-        map.put(4, "<=");
-        map.put(5, ">");
-        map.put(61, ">=");
-        map.put(7, "==");
-        map.put(8, "!");
-        map.put(10, "(");
-        map.put(11, ")");
-        map.put(12, "if");
-        map.put(13, "else");
+        map.put(8, "||");
+        map.put(9, "&&");
+        map.put(10, "<");
+        map.put(11, "<=");
+        map.put(12, ">");
+        map.put(13, ">=");
+        map.put(14, "==");
+        map.put(15, "!");
+        map.put(18, "if");
+        map.put(19, "else");
     }
 }
 

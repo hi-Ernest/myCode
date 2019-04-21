@@ -1,5 +1,9 @@
 package compliation.result;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +21,7 @@ public class IfParser_2 {
     private List<String> list;
 
     //列表的下标
-    private int index;
+    protected int index;
 
     //每次扫描的字符串
     private String token;
@@ -26,8 +30,16 @@ public class IfParser_2 {
     private boolean flag = true;
 
     public IfParser_2(List inputList, int inputIndex) {
-        map = new HashMap();
 
+        getMap();
+        this.list = inputList;
+
+        index = inputIndex;
+        this.token = list.get(index);
+    }
+
+    private void getMap() {
+        map = new HashMap();
         map.put(1, "+");
         map.put(2, "-");
         map.put(3, "*");
@@ -35,20 +47,6 @@ public class IfParser_2 {
         map.put(5, "(");
         map.put(6, ")");
         map.put(7, "i");
-
-        Map map2 = new HashMap();
-        map2.putAll(map);
-        map2.remove(7);
-
-        this.list = inputList;
-        for(int i=0;i<list.size();i++){
-            if(!map2.containsValue(list.get(i)))
-                list.set(i, "i");
-        }
-
-
-        index = inputIndex;
-        this.token = list.get(index);
     }
 
 
@@ -96,6 +94,8 @@ public class IfParser_2 {
         }
         else if(token.equals("i"))
             match("i");
+        else if(token.equals("else"))
+            return;
         else
             error();
     }
@@ -135,8 +135,12 @@ public class IfParser_2 {
     }
 
     public void match(String input) {
-        if(map.containsValue(input))
-            token = getNextToken();
+        if(index+1 < list.size()) {
+            if(map.containsValue(input))
+                token = getNextToken();
+            return;
+        }else
+            return;
     }
 
     private String getNextToken() {
@@ -146,9 +150,39 @@ public class IfParser_2 {
 
     //输出错误信息
     private void error() {
-        System.out.println("错误表达式");
+        System.out.println("错误运算表达式");
         this.flag = false;
     }
 
+//    public static void main(String[] args) throws IOException {
+//        String expr;
+//
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        System.out.println("输入一个空的字符串则结束.....");
+//
+//        while (true) {
+//            System.out.println("请输入你的语句表达式： ");
+//            expr = br.readLine();
+//            if("".equals(expr))
+//                break;
+//
+//            Identifier identifier = new Identifier();
+//
+//            List<String> list = new ArrayList<>();
+//
+//            list = identifier.identifier(expr, list);
+//
+//
+//            System.out.println(list);
+//
+//            IfParser_2 ip = new IfParser_2(list,0);
+//
+//            if(ip.E())
+//                System.out.println("语句正确");
+//
+//            System.out.println(ip.index);
+//        }
+//
+//    }
 
 }
