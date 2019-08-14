@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * --------(蛮力法)
  * 选择排序
- * for n <- 0 to n-2 do
+ * for i <- 0 to n-2 do
  *     min <- i
  *     for j <- i+1 to n-1 do
  *         if A[j] < A[min]
@@ -35,7 +35,7 @@ public class SelectionSort {
                 array[i] = array[min];
                 array[min] = temp;
             }
-            System.out.println(Arrays.toString(array));
-        }
+            System.out.print("第"+(i+1)+"轮排序结果： ");
+            System.out.print(Arrays.toString(array)+ "\n");        }
     }
 }

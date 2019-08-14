@@ -2,6 +2,13 @@ package base.algorithm;
 
 import java.util.Arrays;
 
+/**
+ * 通过递归分解数列,然后再合并数列----->合并排序
+ * 时间复杂度: O(nlogn)
+ * 空间复杂度: O(n)
+ *
+ * 稳定的排序算法
+ */
 public class MergeSort {
 
     public static void main(String[] args) {
