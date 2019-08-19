@@ -1,9 +1,9 @@
-package base.algorithm;
+package base.algorithm.sort;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class QuickSort_247 {
+public class QuickSort {
 
     public static void main(String[] args) {
 
