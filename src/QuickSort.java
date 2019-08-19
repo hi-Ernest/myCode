@@ -78,8 +78,14 @@
 public class QuickSort {
 
     public static void main(String[] args) {
+
+
+        long startTime = System.nanoTime();
         int[] array = {4, 1, 10, 8, 7, 12, 9, 2, 15};
         quickSort(array, 0, array.length-1);
+
+        long endTime = System.nanoTime();
+        System.out.println("运行时间： "+(endTime - startTime) + "ns");
 
         for (int n : array) {
             System.out.print(n + " ");

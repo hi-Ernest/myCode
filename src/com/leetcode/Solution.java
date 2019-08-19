@@ -9,8 +9,10 @@ public class Solution  {
 
     public static void main(String[] args) {
 	// write your code here
-        System.out.println(lengthOfLongestSubstring("aaaa"));
+//        System.out.println(lengthOfLongestSubstring("aaaa"));
+
     }
+
 
     public static int lengthOfLongestSubstring(String s) {
         int answer=0;
@@ -33,5 +35,4 @@ public class Solution  {
         }
         return answer;
     }
-
 }

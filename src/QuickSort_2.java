@@ -24,6 +24,7 @@ public class QuickSort_2 {
         int i = left+1, j = right;
 
         while(i < j) {
+            //哨兵j 从后往前 先出发
             while(array[j]>p){
                 j--;
             }

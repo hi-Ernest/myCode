@@ -5,18 +5,24 @@ import java.util.Arrays;
 
 /**
  * shell排序 平均速度O(n^(3/2)) 最坏情况速度O(n^2)
- * @author wsz
- * @date 2018年1月16日
+ *
  */
 public class ShellSort {
 
     public static void main(String[] args) {
-        int[] array = {89, 45, 68, 90, 29, 34, 17};
-//        shellSort(array);
-//        System.out.println(Arrays.toString(array));
+//        int[] array = {89, 45, 68, 90, 29, 34, 17};
+        int[] array = {4, 1, 10, 8, 7, 12, 9, 2, 15};
 
-        shellsort3(array,array.length);
+        long startTime = System.nanoTime();
+//        shellSort(array);
+//                shellsort3(array,array.length);
+        sort(array);
+        long endTime = System.nanoTime();
         System.out.println(Arrays.toString(array));
+        System.out.println("程序运行时间： "+(endTime - startTime) + "ns");
+
+//        shellsort3(array,array.length);
+//        System.out.println(Arrays.toString(array));
 
     }
 
@@ -60,6 +66,29 @@ public class ShellSort {
         }
     }
 
+
+    public static void sort(int[] arr) {
+
+        //增量gap 逐渐减小
+        for (int gap = arr.length/2; gap>0; gap/=2) {
+
+            for (int i=gap; i<arr.length; i++) {
+
+                int j = gap;
+                while (j-gap >=0 && arr[j] > arr[j-gap]) {
+                    swap(arr, j, j-gap);
+                    j-=gap;
+                }
+            }
+        }
+    }
+
+    private static void swap(int[] arr, int a, int b) {
+        arr[a] = arr[a] + arr[b];
+        arr[b] = arr[a] - arr[b];
+        arr[a] = arr[a] - arr[b];
+
+    }
 
 
     public static void swap(int a, int b){
