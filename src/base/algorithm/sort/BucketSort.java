@@ -1,4 +1,4 @@
-package base.algorithm;
+package base.algorithm.sort;
 
 import java.util.Random;
 

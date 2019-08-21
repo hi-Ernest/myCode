@@ -1,5 +1,7 @@
 package base.algorithm;
 
+import base.algorithm.sort.ShellSort;
+
 public class QuickSelect {
 
     public static void main(String[] args) {
