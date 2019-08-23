@@ -1,0 +1,41 @@
+
+-- The SQL Foundation
+
+
+/*
+  creat table
+  drop
+  alter table XX to XXX
+  alter table 表名 add column 列名
+                  drop
+
+  插入：
+      start transaction; //(or begin (SQL Server)) 开启事务
+      insert into Product values ('1001','T恤',200,556,'2006-02-23');
+      commit; //确认提交
+
+ */
+select product_type, count(*), avg(sale_price)
+from product
+/*
+  对表数据指定筛选条件
+  各种运算符： 加减乘除、and、or、is null、is not null
+ */
+
+where product_type = '衣服' and avg(sale_price)
+/*
+  对表进行分组: 分组键
+  不能使用别名
+  排序是随机的
+  执行顺序： from -> where -> group by -> select
+*/
+group by product_type;
+-- 为聚合结果指定条件 --> 通俗就是指定条件 -> 筛选组
+-- 条件: 常数、聚合函数、group by子句中指定的列名(聚合键)
+having avg(sale_price)>=2500
+
+-- 升序：默认(ASC)
+-- 讲序：DESC
+-- 可以指定多个排序键    特别：null可能开头或末尾
+-- 可以使用别名：SQL执行---> 先执行 select 再会执行 order by
+order by sale_price, product_id
