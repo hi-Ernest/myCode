@@ -70,4 +70,35 @@ public class LongestPalindrome {
     }
 
 
+    //计数器
+    private int count = 0;
+
+    /**
+     * 回文子字符串的个数
+     *
+     * Input: "aaa"
+     * Output: 6
+     * Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+     *
+     * @param s
+     * @return
+     */
+    public int countSubstrings(String s) {
+        for (int i=0; i<s.length(); i++) {
+           extendSubstrings(s, i, i); //奇数长度
+           extendSubstrings(s, i, i+1); //偶数长度
+        }
+
+        return count;
+    }
+
+    private void extendSubstrings(String s, int begin, int end) {
+        while (begin >=0 && end <s.length() && s.charAt(begin) == s.charAt(end)) {
+            begin--;
+            end++;
+            count++;
+        }
+    }
+
+
 }
