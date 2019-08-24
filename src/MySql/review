@@ -39,3 +39,66 @@ having avg(sale_price)>=2500
 -- 可以指定多个排序键    特别：null可能开头或末尾
 -- 可以使用别名：SQL执行---> 先执行 select 再会执行 order by
 order by sale_price, product_id
+
+
+-- 多行插入
+insert into productIns values ('002', '打孔机', '办公用品', 200, 100, '2009-02-23'),
+                              ('002', '打孔机', '办公用品', 800, 100, '2009-02-23'),
+                              ('002', '打孔机', '办公用品', 780, 100, '2009-02-23'),
+                              ('002', '打孔机', '办公用品', null, 100, '2009-02-23');
+
+insert into productIns (product_id, product_name, product_type,product_price)
+                values ('006', '叉子', '厨房用具', 50)
+
+-- 插入默认值
+-- (但在创建表的时候： sale_price integer default 0)
+-- 显式/隐式则忽略该列名以及赋值即可
+default
+
+/*
+  清空表数据 (删除对象而不是表, 而是表中的数据行而不是列)
+ */
+delete from productIns where sale_price >= 25;
+
+
+/*
+  更新数据
+ */
+update product
+    set sale_price = sale_price * 10,
+        purchase_price = purchase / 2
+where product_type = '厨房用具';
+
+
+update product
+    set (sale_price, purchase_price) = (sale_price * 10, purchase_price / 2)
+where product_type = '厨房用具';
+
+
+/*
+  事务
+  1.每条SQL语句就是一个事务
+  2.直到用户执行COMMIT或者ROLLBACK为止算作一个事务
+ */
+
+--  MySQL (SQL server: begin || Oracle、DB2: 无)
+start transaction; -- 开启事务
+    -- DML语句
+    update product
+        set sale_price = sale_price + 200
+    where product_type = 'T恤衣';
+
+    -- DML语句
+    update product
+        set (sale_price, purchase_price) = (sale_price * 10, purchase_price / 2)
+    where product_name = '厨房用具';
+
+commit; -- 事务结束语句(或者rollback;)
+
+
+/*
+  视图
+
+ */
+create view
+
