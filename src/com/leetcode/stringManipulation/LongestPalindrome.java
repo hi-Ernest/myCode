@@ -1,4 +1,4 @@
-package com.leetcode.StringManipulation;
+package com.leetcode.stringManipulation;
 
 
 public class LongestPalindrome {

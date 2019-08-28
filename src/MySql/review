@@ -98,7 +98,72 @@ commit; -- 事务结束语句(或者rollback;)
 
 /*
   视图
+  优点：1)使用视图,不会将数据保存在任何地方(存储设备等),实际上保存的是select语句(节省存储设备的容量)
+       2)将频繁使用select语句保存成视图,这样不用每次都重新书写.只需要在SELECT语句进行调用->得到结果
+         随着原数据表变化->视图也会自动更新
 
+  从视图读取数据：视图内部执行select语句并创建出一张临时表
+
+  总结：视图读取数据->存储数据(不用创建实际的表存储数据,消耗存储空间)
+
+  视图的限制：1)定义视图：不能使用order by子句-------(原因：视图和表一样,数据行是没有顺序的)
+            2)更新视图：select语句未使用distinct、
+                        from子句只有一张表、
+                        未使用group by子句、
+                        未使用having子句
  */
-create view
+
+-- 创建视图
+create view productSum (product_type, cnt_product)
+as
+select product_type, count(*)
+    from product
+    group by product_type;
+
+
+-- 使用视图
+select product_type, cnt_product
+from productSum;
+
+-- ps:可以在视图的基础上创建视图(多重视图)
+
+
+-- 删除视图
+drop view productSum;
+
+
+
+/*
+  子查询
+  1)首先都是会先执行内部的select查询
+ */
+ select product_type, cnt_product
+    -- 直接书写定义视图的select语句
+    from (select product_type, count(*) as cnt_product
+            from Product
+                group by product_type) as ProductSum; -- 作为Product_type视图
+
+
+/*
+  where子句中不能使用标量子查询
+
+  标量子查询：只能返回一行一列的数据
+
+  应该如下：
+ */
+ select product_id, product_name, sale_price
+    from Product
+        where sale_price > (select AVG(sale_price)
+                            from Product);
+
+-- 若加入 group by product_type 即返回多组数据 -> 错误
+-- 使用关联子查询：
+-- 结合条件一定放在子查询中, 关联名称的作用域, 内部可以看到外部,外部不能看到内部
+ select product_id, product_name, sale_price
+    from Product as P1
+        where sale_price > (select AVG(sale_price)
+                                from Product as P2
+                                    where P1.product_type = P2.prduct_type
+                                        group by product_type);
+
 

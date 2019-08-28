@@ -1,4 +1,4 @@
-package com.leetcode.StringManipulation;
+package com.leetcode.stringManipulation;
 
 import java.util.ArrayList;
 import java.util.List;

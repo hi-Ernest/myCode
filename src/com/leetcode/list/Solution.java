@@ -1,4 +1,4 @@
-package com.leetcode.List;
+package com.leetcode.list;
 
 public class Solution {
 

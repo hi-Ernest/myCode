@@ -1,4 +1,4 @@
-package com.leetcode.StringManipulation;
+package com.leetcode.stringManipulation;
 
 import java.util.HashMap;
 import java.util.Map;

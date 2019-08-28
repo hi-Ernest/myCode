@@ -1,4 +1,4 @@
-package com.leetcode.Divide;
+package com.leetcode.divide;
 
 import java.util.ArrayList;
 import java.util.List;
