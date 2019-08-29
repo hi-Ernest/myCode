@@ -156,6 +156,22 @@ drop view productSum;
         where sale_price > (select AVG(sale_price)
                             from Product);
 
+
+ select product_id,
+        product_name,
+        sale_price,
+        (select AVG(sale_price)
+                    from Product) as avg_price
+    from Product;
+
+-- 某种类的平均价格 > 全部商品的平均价格
+select product_type, avg(sale_price)
+    from Product
+    group by product_type
+    having avg(sale_price) > (select avg(sele_price)
+                                from Product);
+
+
 -- 若加入 group by product_type 即返回多组数据 -> 错误
 -- 使用关联子查询：
 -- 结合条件一定放在子查询中, 关联名称的作用域, 内部可以看到外部,外部不能看到内部
@@ -167,3 +183,109 @@ drop view productSum;
                                         group by product_type);
 
 
+/*
+  谓词
+ */
+ select * from SampleLike
+    where strcol like 'ddd%';
+
+-- 输出：dddabc
+
+/*
+  输入：like '%ddd%'
+  输出：abcddd dddabc abdddc
+
+
+  输入：like '%ddd'
+  输出：abcddd
+
+
+  输入：like 'abc__' (两个--即有任意两个字符)
+  输出：abcdd
+
+ */
+
+
+ /*
+    包括即 100 <= x <= 1000
+  */
+ select * from Product
+    where sale_price between 100 and 1000;
+
+
+ /*
+    is null
+    is not null
+    or
+    in (320, 500, 5000) 指定多个进货单价
+    no in
+
+  */
+
+
+  create table ShopProduct
+  (shop_id  char(4) not null,
+   shop_name    varchar(200)    not null,
+   product_id   char(4) not null,
+   quantity integer not null,
+   primary key (shop_id, product_id)
+  );
+
+
+
+/*
+  以行(记录)为单位增减
+
+  执行表的并集操作(重复记录将被去重)
+  保留重复行(关键字：All)
+  选取表中公共的部分(关键字：intersect)
+  记录的减法(关键字：except)
+  注意：
+    1)列数需要保持一致
+    2)相同位置的列必须是统一数据类型 如product_id、regist_date
+    3)可以使用任何select语句, 但order by只能在最后使用一次
+ */
+select product_id, product_name
+    from Product
+union
+select product_id, product_name
+    from Product2
+    order by product_id;
+
+
+/*
+  联接(JOIN)：以列为单位对表进行联接, 列的增减
+
+ */
+
+--  内联接(inner join)(两张表的列联接 -> 公共的是product_id)
+--        内联接只能选取出同时存在于两张表中的数据
+/*
+    要点：1)from子句表使用别名
+         2) on 子句后面联接的条件
+         3)select子句指定列名：<别名>.<列名>
+ */
+select sp.shop_id, sp.shop_name, sp.product_id, p.product_name,
+        p.sale_price
+        from ShopProduct as sp inner join Product as p
+            on sp.product_id = p.priduct_id;
+
+
+-- 外联接(outer join)
+/*
+    结果：比内联接的结果多个两行数据
+
+    要点：1)选取单张表中全部信息
+         2)只有数据存在某一张表中,就能够读取出来
+         实际业务：例如想要生成固定行数的单据时候,需要外联接
+         3)确定哪张是主表 -> LEFT 和 RIGHT
+            如：LEFT -> 即FROM子句中写在左侧的表是主表, RIGHT则是右侧
+ */
+select sp.shop_id, sp.shop_name, sp.product_id, p.product_name,
+        p.sale_price
+        from ShopProduct as sp right outer join Product as p
+            on sp.product_id = p.priduct_id;
+
+/*多个两行
+
+ */
