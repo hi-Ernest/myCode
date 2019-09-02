@@ -286,6 +286,3 @@ select sp.shop_id, sp.shop_name, sp.product_id, p.product_name,
         from ShopProduct as sp right outer join Product as p
             on sp.product_id = p.priduct_id;
 
-/*多个两行
-
- */

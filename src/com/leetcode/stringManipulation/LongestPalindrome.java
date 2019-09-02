@@ -1,6 +1,9 @@
 package com.leetcode.stringManipulation;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LongestPalindrome {
 
     public static void main(String[] args) {
@@ -98,6 +101,65 @@ public class LongestPalindrome {
             end++;
             count++;
         }
+    }
+
+
+    public String longestPalindrome(String s) {
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i=0; i<s.length(); i++) {
+            Character c = s.charAt(i);
+
+            if (map.containsKey(c)) {
+
+            }
+
+            map.put(c, i+1);
+
+        }
+
+
+        return s;
+    }
+
+
+    /**
+     * 判断是否是回文字串
+     * @param s
+     * @return
+     */
+    private boolean isPalindromic(String s) {
+
+        int len = s.length();
+        for (int i=0; i< len / 2; i++) {
+
+            if (s.charAt(i) != s.charAt(len - i + 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //暴力解决
+    public String longstPalindrome_violecne(String s) {
+
+        int len = s.length();
+        int max = 0;
+        String ans = "";
+
+        for (int i=0; i < len; i++) {
+            for (int j = i+1; j < len - 1; j++) {
+                String str = s.substring(i, j);
+
+                if (isPalindromic(str) && str.length() > max) {
+                    ans = str;
+                    max = Math.max(max, ans.length());
+                }
+            }
+        }
+
+        return ans;
     }
 
 

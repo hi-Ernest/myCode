@@ -11,7 +11,6 @@ public class HashPrblems {
      * 时间复杂度为 O(N)
      * 空间复杂度为 O(N)
      *
-     *
      * @param nums
      * @param target
      * @return
@@ -19,10 +18,10 @@ public class HashPrblems {
     public static int[] twoSum(int[] nums, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
 
-        for (int i=0; i<nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(target - nums[i])) {
                 return new int[]{map.get(target - nums[i]), i};
-            }else {
+            } else {
                 map.put(nums[i], i);
             }
         }
