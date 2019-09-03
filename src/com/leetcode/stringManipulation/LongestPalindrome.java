@@ -10,7 +10,17 @@ public class LongestPalindrome {
 
 //        System.out.println(LongestPalindrome("huhubb"));
 
-        System.out.println(isIsomorphic("eeq", "add"));
+//        System.out.println(isIsomorphic("eeq", "add"));
+
+
+//        System.out.println(new LongestPalindrome().longestPalindrome_violecne("bb"));
+
+        String s = "chenhuarui247";
+
+        String reverse = new StringBuffer(s).reverse().toString(); //字符串倒置
+
+        System.out.println(reverse);
+
     }
 
     /**
@@ -134,22 +144,27 @@ public class LongestPalindrome {
         int len = s.length();
         for (int i=0; i< len / 2; i++) {
 
-            if (s.charAt(i) != s.charAt(len - i + 1)) {
+            if (s.charAt(i) != s.charAt(len - i - 1)) {
                 return false;
             }
         }
         return true;
     }
 
-    //暴力解决
-    public String longstPalindrome_violecne(String s) {
+    //暴力解决 Time：O(n^3) -----> 不能AC
+    public String longestPalindrome_violecne(String s) {
 
         int len = s.length();
         int max = 0;
         String ans = "";
 
+        if (s.toCharArray().length == 1)
+            return s;
+
         for (int i=0; i < len; i++) {
-            for (int j = i+1; j < len - 1; j++) {
+
+            //j <= len "bb" 最后的b的情况
+            for (int j = i+1; j <= len; j++) {
                 String str = s.substring(i, j);
 
                 if (isPalindromic(str) && str.length() > max) {
@@ -161,6 +176,9 @@ public class LongestPalindrome {
 
         return ans;
     }
+
+
+
 
 
 }
