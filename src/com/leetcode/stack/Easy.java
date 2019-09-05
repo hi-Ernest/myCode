@@ -1,5 +1,7 @@
 package com.leetcode.stack;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 import java.lang.Exception;
 
@@ -9,21 +11,39 @@ public class Easy {
 
     }
 
+    /**
+     * 简单的括号判断
+     *
+     * @param s
+     * @return
+     */
     public boolean isValid(String s) {
 
         Stack<Character> stack = new Stack<>();
 
-        char[] chars = s.toCharArray();
+        Map<Character, Character> map = new HashMap<>();
 
-        char[] chars1 = {'{','}','(',')','[',']'};
+        map.put('(', ')');
+        map.put('[', ']');
+        map.put('{', '}');
 
-        for (int i=0; i<chars.length; i++) {
-            stack.push(chars[i]);
-            while (!stack.isEmpty()) {
-//                stack.push()
+        for (int i=0; i<s.length(); i++) {
+            if (stack.size() == 0) {
+                stack.push(s.charAt(i));
+                continue;
             }
+
+            char ch = stack.peek();
+            if (map.containsKey(ch) && map.get(ch) == s.charAt(i)) {
+                stack.pop();
+                continue;
+            }
+            stack.push(s.charAt(i));
         }
 
-        return true;
+        if (stack.empty())
+            return true;
+        else
+            return false;
     }
 }
