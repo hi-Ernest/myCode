@@ -8,7 +8,21 @@ import java.lang.Exception;
 public class Easy {
 
     public static void main(String[] args) {
+//        int i = 3;
+//        while (i-->0) {
+//            System.out.println("chr");
+//        }
 
+
+        Stack<Integer> stack = new Stack<>();
+        stack.add(1);
+        stack.add(2);
+        stack.add(3);
+
+        System.out.println(stack);
+
+        stack.pop();
+        System.out.println(stack);
     }
 
     /**
