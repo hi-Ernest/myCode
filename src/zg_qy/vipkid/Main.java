@@ -1,3 +1,5 @@
+package zg_qy.vipkid;
+
 //import java.util.Scanner;
 //
 //public class Main {
@@ -26,6 +28,11 @@
 //}
 import java.util.*;
 
+
+//在赛码的OJ环境下运行成功
+//两个AC为66%
+
+
 class Main {
     public static void main(String[] args) {
 //        Scanner scanner = new Scanner(System.in);
@@ -45,8 +52,6 @@ class Main {
 
         Main main = new Main();
 
-//        System.out.println(main.getNumbers(3));
-//
         List<Integer> list = new ArrayList<>();
 
         Scanner cin = new Scanner(System.in);
@@ -72,6 +77,13 @@ class Main {
 
     }
 
+    /**
+     * 输入一组数字: 1, 5, 5, -5, 56, -1
+     * 输出: 有多少组可以组成相加等于0
+     *
+     * @param nums
+     * @return
+     */
     public int getPair(List<Integer> nums) {
 
         int count = 0, len = nums.size();
@@ -137,6 +149,7 @@ class Main {
 //    }
 
 
+    //求一个十进制的数字转化成二进制有多少个0
     public int getNumbers(int num) {
 
         if (num  == 1) {
