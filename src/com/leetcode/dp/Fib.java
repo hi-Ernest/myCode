@@ -99,7 +99,7 @@ public class Fib {
 
         dp[1] = dp[2] = 1;
 
-        for (int i = 3; i<dp.length; i++) {
+        for (int i = 3; i<=N; i++) {
             dp[i] = dp[i-1] + dp[i-2];
         }
 
@@ -115,6 +115,7 @@ public class Fib {
         if (N < 2)
             return N;
 
+        //Index 从 0 -> 18
         for (int i = 0; i < N-1; i++) {
             int temp = pre + curr;
             pre = curr;
