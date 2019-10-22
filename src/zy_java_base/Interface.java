@@ -19,16 +19,10 @@ package zy_java_base;
  */
 public interface Interface {
 
-//    public Interface() {
-//
-//    }
-
-
     public static final int i = 8;
 
     static final boolean flag = true;
 
     int j = 0;
-
 
 }

@@ -1,5 +1,8 @@
 package com.leetcode.dp;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Knapsack {
 
     /**
@@ -15,16 +18,16 @@ public class Knapsack {
      * @return
      */
     public int knapsack(int W, int N, int[] weights, int[] values) {
-        int[][] dp = new int[W+1][N+1];
+        int[][] dp = new int[W + 1][N + 1];
 
-        for (int i=1; i<=N; i++) {
-            int w = weights[i-1], v = values[i-1];
+        for (int i = 1; i <= N; i++) {
+            int w = weights[i - 1], v = values[i - 1];
 
-            for (int j=1; j<=W; j++) {
+            for (int j = 1; j <= W; j++) {
                 if (j >= w) {
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-w]+v);
-                }else {
-                    dp[i][j] = dp[i-1][j];
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w] + v);
+                } else {
+                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }
@@ -32,14 +35,14 @@ public class Knapsack {
     }
 
     public int knapsack_2(int W, int N, int[] weights, int[] values) {
-        int[] dp = new int[W+1];
+        int[] dp = new int[W + 1];
 
-        for (int i=1; i<=N; i++) {
-            int w = weights[i-1], v = values[i-1];
+        for (int i = 1; i <= N; i++) {
+            int w = weights[i - 1], v = values[i - 1];
 
-            for (int j=W; j>=1; j--) {
+            for (int j = W; j >= 1; j--) {
                 if (j >= w) {
-                    dp[j] = Math.max(dp[j], dp[j-w]+v);
+                    dp[j] = Math.max(dp[j], dp[j - w] + v);
                 }
             }
         }
@@ -47,6 +50,36 @@ public class Knapsack {
     }
 
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
+        //4
+        int number = scanner.nextInt();
 
+        String read = scanner.nextLine();
+
+        int w = scanner.nextInt();
+
+        String read2 = scanner.nextLine();
+
+        String[] input = scanner.nextLine().split(" ");
+        int[] weghts = new int[number];
+        int[] values = new int[number];
+
+        for (int i = 0; i < number; i++) {
+            weghts[i] = Integer.parseInt(input[i]);
+        }
+
+        input = scanner.nextLine().split(" ");
+
+        for (int j = 0; j < number; j++) {
+            values[j] = Integer.parseInt(input[j]);
+        }
+
+        System.out.println(number+" " + w +" "+Arrays.toString(weghts)+" "+Arrays.toString(values));
+
+        Knapsack knapsack = new Knapsack();
+        System.out.println( knapsack.knapsack(w,number, weghts, values));
+
+    }
 }

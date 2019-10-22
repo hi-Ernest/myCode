@@ -1,4 +1,4 @@
-package Test;
+package zy_java_base;
 
 import java.util.ArrayList;
 import java.util.Scanner;

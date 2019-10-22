@@ -2,10 +2,17 @@ package base.algorithm;
 
 public class BinarySearch {
 
+    private static int count = 0;
+
     public static void main(String[] args) {
         int[] array = {89,45,68,90,29,34,17};
-        System.out.println(binarySearch(array, 68));
-        System.out.println(binarySearch_2(array, 0, array.length, 68));
+
+        int[] test = {1,2,3,4,5,6,7,8,9,10};
+        int[] a = {2,5,7,10,14,15,18,23,35,41,52};
+
+//        System.out.println(binarySearch(array, 68));
+        System.out.println(binarySearch(a,14));
+        System.out.println(count);
 
 
     }
@@ -22,12 +29,18 @@ public class BinarySearch {
 
         while (l<=r) {
             int m = (l+r)/2;
-            if(k == array[m])
+            if(k == array[m]) {
+                count+=1;
                 return m;
-            else if(k < array[m])
+            }
+            else if(k < array[m]) {
                 r = m-1;
-            else
+                count++;
+            }
+            else {
                 l = m+1;
+                count++;
+            }
         }
         return -1;
     }

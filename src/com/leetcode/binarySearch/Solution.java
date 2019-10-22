@@ -1,5 +1,7 @@
 package com.leetcode.binarySearch;
 
+import java.util.Arrays;
+
 /**
  * 二分查找问题
  */
@@ -7,6 +9,18 @@ public class Solution {
 
     public static void main(String[] args) {
 
+        int[] t = new int[166];
+        for (int i=0; i<166; i++) {
+            t[i] = i;
+        }
+
+        System.out.println(Arrays.toString(t));
+        System.out.println(t.length);
+
+        Solution s = new Solution();
+        s.binarySearch(t, 9);
+        System.out.println();
+        s.binarySearch_2(t, 9);
     }
 
 
@@ -24,7 +38,10 @@ public class Solution {
 
             //这里就是为了避免l+h > int范围的数值
             int mid = l + (l+h)/2;
-            if (nums[mid] == key) {
+
+            int t = nums[mid];
+            System.out.println(t);
+            if ( t == key) {
                 return mid;
             }else if (nums[mid] > key) {
                 h = mid-1;
@@ -32,7 +49,7 @@ public class Solution {
                 l = mid+1;
             }
         }
-        return -1;
+        return l;
     }
 
 
@@ -169,6 +186,7 @@ public class Solution {
 
         while (l < h) {
             int mid = l+(h-l)/2;
+            System.out.println(nums[mid]);
             if (nums[mid] >= target) {
                 h = mid;
             }else {
