@@ -40,5 +40,23 @@ public class Reverse {
 
     }
 
+    public void inversion(String s) {
+        List<String> res = new ArrayList<>();
+
+        char[] array = s.toCharArray();
+
+        int index =0;
+        for (int i=0; i<array.length; i++) {
+            if (array[i] == ' ' || array[i] == array.length-1) {
+                res.add(s.substring(i, index));
+                index = i+1;
+            }
+        }
+
+        for (int k=res.size()-1; k>=0; k++) {
+            System.out.println(res.get(k) + " ");
+        }
+    }
+
 
 }

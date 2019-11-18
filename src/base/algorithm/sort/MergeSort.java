@@ -8,6 +8,7 @@ import java.util.Arrays;
  * 空间复杂度: O(n)
  *
  * 稳定的排序算法
+ * 外排序
  */
 public class MergeSort {
 
