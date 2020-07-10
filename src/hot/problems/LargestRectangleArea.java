@@ -7,6 +7,8 @@ import java.util.Stack;
 /**
  * @author Ernest Chen
  * @date 2020/7/4.
+ *
+ * leetcode[84]
  */
 public class LargestRectangleArea {
 
@@ -91,7 +93,7 @@ public class LargestRectangleArea {
      * @param heights
      * @return
      */
-    public static int sentilnelOfStackToSolve(int[] heights) {
+    public static int usesSntryOfStackToSolve(int[] heights) {
         int len = heights.length;
         if (heights == null || len == 0) {
             return 0;
